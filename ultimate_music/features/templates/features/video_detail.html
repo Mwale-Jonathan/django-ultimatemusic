@@ -1,0 +1,31 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+  <div class="content-section">
+    <div class="video" style="">
+      <video src="{{ object.video.url }}" autobuffer autoloop loop controls poster=""></video>
+    </div>
+    <div class="content">
+      <h4 class="article-title">{{ object.title }}</h4>
+      <p>by {{ object.artist }}</p>
+      <p class="text-muted">{{ object.date_posted }}</p>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="{{ object.video.url }}" class="btn btn-secondary" download><i class="fa fa-download"></i></a>
+        <a href="{{ object.video.url }}" class="btn btn-secondary" play><i class="fa fa-play"></i></a>
+        <a href="#" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-share"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item hover" href="https://www.facebook.com/sharer/sharer.php?u=http://your-domain{{ request.get_full_path|urlencode }}">
+            <i class="fa fa-facebook"></i>
+            Share on Facebook
+          </a>
+          <a class="dropdown-item hover" href="https://twitter.com/home?status=check%20this%20out%20your-domain{{ request.get_full_path|urlencode }}">
+            <i class="fa fa-twitter"></i>
+            Share on Twitter
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

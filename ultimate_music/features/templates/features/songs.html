@@ -1,0 +1,36 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="content-section">
+		{% include 'web/search.html' %}
+	</div>
+	<ul class="list-unstyled">
+		{% for song in songs %}
+			<li class="media content-section">
+				<img src="{{ song.cover.url }}" class="mr-3" style="width: 64px;">
+				<div class="media-body ">
+					<a href="{% url 'song-detail' song.id %}">
+						<h5 class="mt-0 mb-1 border-bottom">{{ song.title }}</h5>
+					</a>
+					by {{ song.artist }}
+				</div>
+			</li>
+		{% endfor %}
+		<div class="pagination content-section">
+			{% if songs.has_previous %}
+				<a class="btn btn-outline-dark mr-2" href="?page={{ songs.previous_page_number }}">Previous</a>
+			{% endif %}
+			{% for pg in songs.paginator.page_range %}
+				{% if songs.number == pg %}
+				<a class="btn btn-dark mr-2" href="?page={{ pg }}">{{ pg }}</a>
+				{% else %}
+				<a class="btn btn-outline-dark mr-2" href="?page={{ pg }}">{{ pg }}</a>
+				{% endif %}
+			{% endfor %}
+			{% if songs.has_next %}
+				<a class="btn btn-outline-dark" href="?page={{ songs.next_page_number }}">next</a>
+			{% endif %}
+		</div>
+	</ul>
+{% endblock %}

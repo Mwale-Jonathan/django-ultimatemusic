@@ -1,0 +1,38 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="content-section">
+		{% include 'web/search.html' %}
+	</div>
+
+	<ul class="list-unstyled">
+		{% for instrumental in instrumentals %}
+			<li class="media content-section">
+				<img src="{{ instrumental.cover.url }}" class="mr-3" style="width: 64px;">
+				<div class="media-body ">
+					<a href="{% url 'instrumental-detail' instrumental.id %}">
+						<h5 class="mt-0 mb-1 border-bottom">{{ instrumental.title }}</h5>
+					</a>
+					by ultimate music
+				</div>
+			</li>
+		{% endfor %}
+		
+		<div class="pagination content-section">
+			{% if instrumentals.has_previous %}
+				<a class="btn btn-outline-dark mr-2" href="?page={{ instrumentals.previous_page_number }}">Previous</a>
+			{% endif %}
+			{% for pg in instrumentals.paginator.page_range %}
+				{% if instrumentals.number == pg %}
+				<a class="btn btn-dark mr-2" href="?page={{ pg }}">{{ pg }}</a>
+				{% else %}
+				<a class="btn btn-outline-dark mr-2" href="?page={{ pg }}">{{ pg }}</a>
+				{% endif %}
+			{% endfor %}
+			{% if instrumentals.has_next %}
+				<a class="btn btn-outline-dark" href="?page={{ instrumentals.next_page_number }}">next</a>
+			{% endif %}
+		</div>
+		
+	</ul>
+{% endblock %}

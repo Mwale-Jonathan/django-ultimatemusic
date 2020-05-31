@@ -1,0 +1,29 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="card bg-dark text-white">
+    <img src="{{ object.cover.url }}" class="card-img" style="object-fit: cover;">
+    <div class="card-img-overlay">
+      <h5 class="card-title">{{ object.title }}</h5>
+      <p class="card-text"> by {{ object.artist }}</p>
+      <p class="card-text">{{ object.date_posted|time }}</p>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="{{ object.song.url }}" class="btn btn-secondary" download><i class="fa fa-download"></i></a>
+        <a href="{{ object.song.url }}" class="btn btn-secondary" play><i class="fa fa-play"></i></a>
+        <a href="#" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-share"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item hover" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+            Share on Facebook
+        </a>
+        <a class="dropdown-item hover" href="https://twitter.com/home?status=check%20this%20out%20{{ request.build_absolute_uri }}">
+          <i class="fa fa-twitter"></i>
+          Share on Twitter
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
